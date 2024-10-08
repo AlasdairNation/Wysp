@@ -1,0 +1,20 @@
+pytest:
+  addopts: "--maxfail=5 --disable-warnings"
+test_types:
+  - unit:
+      description: "Unit tests"
+      method: "unit_method"
+  - integration:
+      description: "Integration tests"
+      method: "integration_method"
+  - system:
+      description: "System tests"
+      method: "system_method"
+
+tests:
+  - title: "unit"
+    required_keys: []
+    required_files:
+      - "Test/GameHandler/test_gameHandlerAPI.py"
+      - "Test/GameHandler/test_gameInfo.py"
+      - "Test/Plugins/test_getInfo.py"

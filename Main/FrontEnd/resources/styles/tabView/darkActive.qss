@@ -1,0 +1,28 @@
+/* Active state for tab view */
+QFrame {
+    background-color: #1E1E2E;
+    border: 1px solid #D9E0EE;
+}
+
+QTabBar::tab {
+    background-color: #292D3E;
+    color: #D9E0EE;
+    padding: 6px;
+    border-radius: 2px;
+    margin: 2px;
+}
+
+QTabBar::tab:selected {
+    background-color: #89B4FA;
+    color: #1E1E2E;
+}
+
+QTabBar::tab:hover:selected {
+    background-color: #89B4FA;
+    color: #1E1E2E;
+}
+
+QTabBar::tab:hover {
+    background-color: #45475A;
+    color: #D9E0EE;
+}

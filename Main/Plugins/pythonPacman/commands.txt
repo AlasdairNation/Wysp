@@ -1,0 +1,20 @@
+--layout testMaze --pacman GoWestAgent
+--layout tinyMaze --pacman GoWestAgent
+-h
+-l tinyMaze -p SearchAgent -a fn=tinyMazeSearch
+-l tinyMaze -p SearchAgent
+-l mediumMaze -p SearchAgent
+-l bigMaze -z .5 -p SearchAgent
+-l mediumMaze -p SearchAgent -a fn=bfs
+-l bigMaze -p SearchAgent -a fn=bfs -z .5
+-l mediumMaze -p SearchAgent -a fn=ucs
+-l mediumDottedMaze -p StayEastSearchAgent
+-l mediumScaryMaze -p StayWestSearchAgent
+-l bigMaze -z .5 -p SearchAgent -a fn=astar,heuristic=manhattanHeuristic 
+-l tinyCorners -p SearchAgent -a fn=bfs,prob=CornersProblem
+-l mediumCorners -p SearchAgent -a fn=bfs,prob=CornersProblem
+-l mediumCorners -p AStarCornersAgent -z 0.5
+-l testSearch -p AStarFoodSearchAgent
+-l trickySearch -p AStarFoodSearchAgent
+-l bigSearch -p ClosestDotSearchAgent -z .5 
+-l bigSearch -p ApproximateSearchAgent -z .5 -q 

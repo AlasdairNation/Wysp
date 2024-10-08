@@ -1,0 +1,1 @@
+python pacman.py -p SearchAgent -a fn=depthFirstSearch

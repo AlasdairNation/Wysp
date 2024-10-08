@@ -1,0 +1,157 @@
+/* Overall window styling */
+QWidget#SelectionWindow, QInputDialog, QMessageBox { /* For Message Boxes and Selection Windows*/
+    background-color: #1E1E2E;
+    color: #c6ddf3;
+    font-family: Arial;
+    font-size: 12pt;
+}
+
+QRadioButton#SelectionWindow{
+    border: 1px solid #3E445E;
+    color: #c6ddf3;
+    font-family: Arial;
+    font-size: 12pt;
+}
+
+QMainWindow {
+    background-color: #1E1E2E;
+    color: #c6ddf3;
+    font-family: Arial;
+    font-size: 12pt;
+}
+
+QToolTip { 
+    background-color: #1E1E2E; 
+    color: #c6ddf3; 
+}
+
+/* QFrame styling (general frame for all sections) */
+QFrame {
+    background-color: #1E1E2E;
+    border: none;
+} 
+
+/* Styling for the QTreeView header (column names) */
+QHeaderView::section {
+    background-color: #1E1E2E;
+    color: #c6ddf3;
+    border: 1px solid #3E445E;
+}
+
+QTreeView {
+    background-color: #292D3E;
+    color: #c6ddf3;
+    border: 1px solid #3E445E;
+    font-family: Arial;
+    font-size: 12pt;
+}
+
+QTreeView::header {
+    background-color: #1E1E2E;
+    color: #c6ddf3;
+    font-family: Arial;
+    font-size: 12pt;
+    border: 1px solid #3E445E;
+}
+
+QTreeView::item {
+    height: 24px;
+}
+
+QTreeView::item:selected {
+    background-color: #89B4FA;
+    color: #1E1E2E;
+}
+
+QTreeView::item:hover {
+    background-color: #45475A;
+}
+
+QTreeView::item:hover:selected {
+    background-color: #89B4FA;
+    color: #1E1E2E;
+}
+
+/* Error Log */
+QPlainTextEdit#ErrorLog, QWidget#ErrorLog {
+    background-color: #1C1C2C;
+    color: #F28FAD;
+    font-family: Consolas;
+    font-size: 12pt;
+    border: 1px solid #4C566A;
+}
+
+/* Terminal */
+QLineEdit#Terminal, QPlainTextEdit#Terminal {
+    background-color: #1C1C2C;
+    color: #c6ddf3;
+    font-family: Consolas;
+    font-size: 12pt;
+    border: 1px solid #4C566A;
+}
+
+QLabel{
+    color: #c6ddf3;
+}
+
+/* Push buttons and tool buttons */
+QPushButton, QToolButton {
+    background-color: #3B4252;
+    color: #c6ddf3;
+    font-family: Arial;
+    font-size: 12pt;
+    border: 1px solid #4C566A;
+    border-radius: 2px;
+    margin: 2px;
+}
+
+QPushButton:hover, QToolButton:hover {
+    background-color: #4C566A;
+}
+
+/* Scrollbars */
+QScrollBar:vertical {
+    background-color: #1E1E2E;
+    width: 10px;
+}
+
+QScrollBar::handle:vertical {
+    background-color: #4C566A;
+    min-height: 20px;
+}
+
+QScrollBar:horizontal {
+    background-color: #1E1E2E;
+    height: 12px;
+}
+
+QScrollBar::handle:horizontal {
+    background-color: #4C566A;
+    min-width: 20px;
+}
+
+/* Highlight (selection) */
+QTextEdit::selection, QLineEdit::selection {
+    background-color: #89B4FA;
+    color: #1E1E2E;
+}
+
+/* Menu Bar */
+QMenuBar {
+    background-color: #1E1E2E;
+    color: #c6ddf3;
+    border: 1px solid #4C566A;
+    font-family: Arial;
+    font-size: 12pt;
+}
+
+QMenuBar::item {
+    background-color: #1E1E2E;
+    color: #c6ddf3;
+    padding: 2px;
+}
+
+QMenuBar::item:selected {
+    background-color: #89B4FA;
+    color: #1E1E2E;
+}
