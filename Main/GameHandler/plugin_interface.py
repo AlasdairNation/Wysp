@@ -130,7 +130,6 @@ class plugin_interface(ABC):
             # PyInstaller will extract the bundled files to _MEIPASS
             bundled_jpype_path = Path(sys._MEIPASS) / "jpype"
             if bundled_jpype_path.exists():
-                print(f"JPype bundled path found: {bundled_jpype_path}")
                 return bundled_jpype_path
             else:
                 raise ImportError("JPype bundled path not found in the executable.")
@@ -139,7 +138,6 @@ class plugin_interface(ABC):
             spec = importlib.util.find_spec("jpype")
             if spec is not None and spec.origin:
                 jpype_dir = str(Path(spec.origin).parent)
-                print(f"JPype found at: {jpype_dir}")
                 return jpype_dir
             else:
                 raise ImportError("JPype module not found.")

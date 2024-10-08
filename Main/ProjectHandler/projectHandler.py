@@ -62,7 +62,6 @@ class ProjectHandlerAPI:
     def newGameProject(self,inGameInfo, inProjectName, dir=''):
         if dir == '':
             # Checks if SavedProjects folder exists
-            
             saveFolder = os.path.join(os.getcwd(), "SavedProjects")
             if not os.path.exists(saveFolder):
                 os.makedirs(saveFolder)
@@ -275,7 +274,6 @@ class ProjectHandler:
                 #jrePath = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'Libraries', 'Windows', 'windows-jdk', 'bin', 'java.exe') # USE WHEN USING WINDOWS
                 #jrePath =  os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'Libraries', 'Linux', 'linux-jdk', 'bin', 'java') # USE WHEN DOING LINUX
                 #command = [jrePath, "-cp", gamePath, gameName.replace(".java", "")] + args.split()
-                print("COMPILING")
                 # Run Java files using your JRE COMMENT OUT WHEN PACKAGING
                 classpath_separator = ";" if os.name == "nt" else ":"
                 jpypDir = gameProjectInfo.getJpypeLocation()
@@ -367,10 +365,26 @@ class ProjectHandler:
             raise FileNotFoundError(f"Could not find Java build file {compileScriptName}")
         
         script = Path(scriptSearch[0]).resolve()
-        compProcess = subprocess.Popen([script], stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
-        
-        stdout, stderr = compProcess.communicate()
-        
+        try:
+            compProcess = subprocess.Popen([script], stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+            stdout, stderr = compProcess.communicate()
+        except Exception:
+            # Dear god I don't know why this works
+            # For some reason it might not recognise the build file, but it will after you save and write it again.
+            # This is a stupid fix for stupid problem.
+            if os.path.exists(script):
+                file = open(script,'r')
+                contents = file.read()
+                file.close()
+                file = open(script,'w')
+                file.write(contents)
+                file.close()
+
+                compProcess = subprocess.Popen([script], stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+                stdout, stderr = compProcess.communicate()
+                
+                
+
         # Redirect output to the terminal and error log
         if stdout:
             print(stdout)  # Redirect to terminal

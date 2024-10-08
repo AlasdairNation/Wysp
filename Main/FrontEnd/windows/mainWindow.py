@@ -405,7 +405,6 @@ class MainWindow(QMainWindow):
             spec = importlib.util.find_spec("jpype")
             if spec is not None and spec.origin:
                 jpype_dir = spec.origin
-                print(f"JPype found at: {jpype_dir}")
                 return jpype_dir
             else:
                 raise ImportError("JPype module not found.")
@@ -510,6 +509,8 @@ class MainWindow(QMainWindow):
                 self.saveProject()
             
     def returnFromCodeEditor(self):
+        os.chdir("..")
+        os.chdir("..")
         self._returnMethod(False)
 
     def setUpRedirect(self):

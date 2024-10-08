@@ -106,7 +106,6 @@ class GameSelectionWindow(QWidget):
         self.move(qr.topLeft())
 
     def onBackButtonClicked(self):
-        print("On back button")
         self._returnMethod(0)
         self.close()
 
