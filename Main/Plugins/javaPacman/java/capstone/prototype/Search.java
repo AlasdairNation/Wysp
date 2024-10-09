@@ -67,137 +67,31 @@ public class Search {
     }
 
     public static List<Direction> depthFirstSearch(SearchProblem _problem) {
+        /*
+         * Search the deepest nodes in the search tree first.
+         * 
+         * Your search algorithm needs to return a list of actions that reaches the
+         * goal. Make sure to implement a graph search algorithm.
+         * 
+         * To get started, you might want to try some of these simple commands to
+         * understand the search problem that is being passed in:
+         * 
+         * NeededType problem = (NeededType) _problem;
+         * System.out.println("Start:" + problem.getStartState());
+         * System.out.println("Is the start a goal?" + problem.isGoalState(problem.getStartState()));
+         * System.out.println("Start's successors:" + problem.getSuccessors(problem.getStartState()));
+         */
+
         if (_problem instanceof PositionSearchProblem) {
-
-            PositionSearchProblem problem = (PositionSearchProblem) _problem;
-            Stack<Tuple<PositionSearchProblemState, List<Direction>>> stackXY = new Stack<>();
-            List<Position> visited = new ArrayList<>();
-            List<Direction> path = new ArrayList<>();
-
-            if (problem.isGoalState(problem.getStartState()))
-                return path;
-
-            PositionSearchProblemState startState = (PositionSearchProblemState) problem.getStartState();
-            stackXY.push(new Tuple<>(startState, new ArrayList<>()));
-
-            while (true) {
-                // can't find solution
-                if (stackXY.isEmpty())
-                    return new ArrayList<>();
-
-                // get info about current state
-                Tuple<PositionSearchProblemState, List<Direction>> entry = stackXY.pop();
-                PositionSearchProblemState currentState = entry.first;
-                Position xy = currentState.position;
-                path = entry.second;
-                visited.add(xy);
-
-                // if reached goal
-                if (problem.isGoalState(currentState))
-                    return path;
-
-                List<Triple<ProblemState, Direction, Integer>> succ = problem.getSuccessors(currentState);
-                if (succ == null)
-                    continue;
-
-                for (Triple<ProblemState, Direction, Integer> item : succ) {
-                    Position nextXY = ((PositionSearchProblemState) item.first).position;
-
-                    if (!visited.contains(nextXY)) {
-                        List<Direction> newPath = new ArrayList<>(path);
-                        newPath.add(item.second);
-                        stackXY.push(new Tuple<>((PositionSearchProblemState) item.first, newPath));
-                    }
-                }
-            }
+            //Your Code Here
         }
 
         else if (_problem instanceof CornersProblem) {
-            CornersProblem problem = (CornersProblem) _problem;
-            Stack<Tuple<CornersProblemState, List<Direction>>> stackXY = new Stack<>();
-            List<Position> visited = new ArrayList<>();
-            List<Direction> path = new ArrayList<>();
-
-            if (problem.isGoalState(problem.getStartState()))
-                return path;
-
-            CornersProblemState startState = (CornersProblemState) problem.getStartState();
-            stackXY.push(new Tuple<>(startState, new ArrayList<>()));
-
-            while (true) {
-                if (stackXY.isEmpty())
-                    return new ArrayList<>();
-
-                // get info about current state
-                Tuple<CornersProblemState, List<Direction>> entry = stackXY.pop();
-                CornersProblemState cps = entry.first;
-                Tuple<Position, List<Integer>> state = cps.state;
-                path = entry.second;
-                visited.add(state.first);
-
-                // if reached goal
-                if (problem.isGoalState(cps))
-                    return path;
-
-                List<Triple<ProblemState, Direction, Integer>> succ = problem.getSuccessors(cps);
-                if (succ == null || succ.isEmpty())
-                    continue;
-
-                for (Triple<ProblemState, Direction, Integer> item : succ) {
-                    Position temp = ((CornersProblemState) item.first).state.first;
-
-                    if (!visited.contains(temp)) {
-                        List<Direction> newPath = new ArrayList<>(path);
-                        newPath.add(item.second);
-                        CornersProblemState nextState = (CornersProblemState) item.first;
-                        stackXY.push(new Tuple<>(nextState, newPath));
-                    }
-                }
-            }
+            //Your Code Here
         }
 
         else if (_problem instanceof FoodSearchProblem) {
-            FoodSearchProblem problem = (FoodSearchProblem) _problem;
-            Stack<Tuple<FoodSearchProblemState, List<Direction>>> stackXY = new Stack<>();
-            List<Position> visited = new ArrayList<>();
-            List<Direction> path = new ArrayList<>();
-
-            if (problem.isGoalState(problem.getStartState()))
-                return path;
-
-            FoodSearchProblemState startState = (FoodSearchProblemState) problem.getStartState();
-            stackXY.push(new Tuple<>(startState, new ArrayList<>()));
-
-            while (true) {
-                if (stackXY.isEmpty())
-                    return new ArrayList<>();
-
-                // get info about current state
-                Tuple<FoodSearchProblemState, List<Direction>> entry = stackXY.pop();
-                FoodSearchProblemState fsp = entry.first;
-                Tuple<Position, Grid> state = fsp.state;
-                path = entry.second;
-                visited.add(state.first);
-
-                // if reached goal
-                if (problem.isGoalState(fsp))
-                    return path;
-
-                List<Triple<ProblemState, Direction, Integer>> succ = problem.getSuccessors(fsp);
-                if (succ == null)
-                    continue;
-
-                for (Triple<ProblemState, Direction, Integer> item : succ) {
-                    Position temp = ((FoodSearchProblemState) item.first).state.first;
-
-                    if (!visited.contains(temp)) {
-                        List<Direction> newPath = new ArrayList<>(path);
-                        newPath.add(item.second);
-                        FoodSearchProblemState nextState = (FoodSearchProblemState) item.first;
-                        stackXY.push(new Tuple<>(nextState, newPath));
-                    }
-                }
-            }
+            //Your Code Here
         }
 
         throw new UnsupportedOperationException(
@@ -205,355 +99,37 @@ public class Search {
     }
 
     public static List<Direction> breadthFirstSearch(SearchProblem _problem) {
+        /* Search the shallowest nodes in the search tree first. */
+
         if (_problem instanceof PositionSearchProblem) {
-
-            PositionSearchProblem problem = (PositionSearchProblem) _problem;
-            Queue<Tuple<PositionSearchProblemState, List<Direction>>> queueXY = new LinkedList<>();
-            List<Position> visited = new ArrayList<>();
-            List<Direction> path = new ArrayList<>();
-
-            if (problem.isGoalState(problem.getStartState()))
-                return path;
-
-            PositionSearchProblemState startState = (PositionSearchProblemState) problem.getStartState();
-            queueXY.add(new Tuple<>(startState, new ArrayList<>()));
-
-            while (true) {
-                // can't find solution
-                if (queueXY.isEmpty())
-                    return new LinkedList<>();
-
-                // get info about current state
-                Tuple<PositionSearchProblemState, List<Direction>> entry = queueXY.poll();
-                PositionSearchProblemState currentState = entry.first;
-                Position xy = currentState.position;
-                path = entry.second;
-                visited.add(xy);
-
-                // if reached goal terminate
-                if (problem.isGoalState(currentState))
-                    return path;
-
-                List<Triple<ProblemState, Direction, Integer>> succ = problem.getSuccessors(currentState);
-                if (succ == null)
-                    continue;
-
-                for (Triple<ProblemState, Direction, Integer> item : succ) {
-                    PositionSearchProblemState successorState = (PositionSearchProblemState) item.first;
-                    Direction direction = item.second;
-
-                    // Check if the successor has been visited or is already in the queue
-                    if (!visited.contains(successorState.position) &&
-                            queueXY.stream().noneMatch(t -> t.first.position.equals(successorState.position))) {
-
-                        List<Direction> newPath = new ArrayList<>(path); // Create a new path
-                        newPath.add(direction); // Add the direction to the path
-                        // Add the new state to the queue
-                        queueXY.add(new Tuple<>(new PositionSearchProblemState(successorState.position), newPath));
-                    }
-                }
-            }
+            //Your Code Here
         }
 
         else if (_problem instanceof CornersProblem) {
-            CornersProblem problem = (CornersProblem) _problem;
-            Queue<Tuple<CornersProblemState, List<Direction>>> queueXY = new LinkedList<>();
-            List<Position> visited = new ArrayList<>();
-            List<Direction> path = new ArrayList<>();
-
-            if (problem.isGoalState(problem.getStartState()))
-                return path;
-
-            CornersProblemState startState = (CornersProblemState) problem.getStartState();
-            queueXY.add(new Tuple<>(startState, new ArrayList<>()));
-
-            while (true) {
-                if (queueXY.isEmpty())
-                    return new LinkedList<>();
-
-                // get info about current state
-                Tuple<CornersProblemState, List<Direction>> entry = queueXY.poll();
-                CornersProblemState cps = entry.first;
-                Tuple<Position, List<Integer>> state = cps.state;
-                path = entry.second;
-                visited.add(state.first);
-
-                // if reached goal
-                if (problem.isGoalState(cps))
-                    return path;
-
-                List<Triple<ProblemState, Direction, Integer>> succ = problem.getSuccessors(cps);
-                if (succ == null || succ.isEmpty())
-                    continue;
-
-                for (Triple<ProblemState, Direction, Integer> item : succ) {
-                    Position temp = ((CornersProblemState) item.first).state.first;
-
-                    if (!visited.contains(temp)) {
-                        List<Direction> newPath = new ArrayList<>(path);
-                        newPath.add(item.second);
-                        CornersProblemState nextState = (CornersProblemState) item.first;
-                        queueXY.add(new Tuple<>(nextState, newPath));
-                    }
-                }
-            }
+            //Your Code Here
         }
 
         else if (_problem instanceof FoodSearchProblem) {
-            FoodSearchProblem problem = (FoodSearchProblem) _problem;
-            Queue<Tuple<FoodSearchProblemState, List<Direction>>> queueXY = new LinkedList<>();
-            List<Position> visited = new ArrayList<>();
-            List<Direction> path = new ArrayList<>();
-
-            if (problem.isGoalState(problem.getStartState()))
-                return path;
-
-            FoodSearchProblemState startState = (FoodSearchProblemState) problem.getStartState();
-            queueXY.add(new Tuple<>(startState, new ArrayList<>()));
-
-            while (true) {
-                if (queueXY.isEmpty())
-                    return new LinkedList<>();
-
-                // get info about current state
-                Tuple<FoodSearchProblemState, List<Direction>> entry = queueXY.poll();
-                FoodSearchProblemState fsp = entry.first;
-                Tuple<Position, Grid> state = fsp.state;
-                path = entry.second;
-                visited.add(state.first);
-
-                // if reached goal
-                if (problem.isGoalState(fsp))
-                    return path;
-
-                List<Triple<ProblemState, Direction, Integer>> succ = problem.getSuccessors(fsp);
-                if (succ == null)
-                    continue;
-
-                for (Triple<ProblemState, Direction, Integer> item : succ) {
-                    Position temp = ((FoodSearchProblemState) item.first).state.first;
-
-                    if (!visited.contains(temp)) {
-                        List<Direction> newPath = new ArrayList<>(path);
-                        newPath.add(item.second);
-                        FoodSearchProblemState nextState = (FoodSearchProblemState) item.first;
-                        queueXY.add(new Tuple<>(nextState, newPath));
-                    }
-                }
-            }
+            //Your Code Here
         }
 
         throw new UnsupportedOperationException(
-                "Unimplemented method 'depthFirstSearch' for unknown SearchProblem type");
+                "Unimplemented method 'breadthFirstSearch' for unknown SearchProblem type");
     }
 
     public static List<Direction> uniformCostSearch(SearchProblem _problem) {
+        /* Search the node of least total cost first. */
+
         if (_problem instanceof PositionSearchProblem) {
-
-            PositionSearchProblem problem = (PositionSearchProblem) _problem;
-            // queueXY: ( (position),[path] ), priority
-            PriorityQueue<Tuple<Tuple<Position, List<Direction>>, Integer>> queueXY = new PriorityQueue<>(
-                    (a, b) -> Integer.compare(a.second, b.second));
-
-            List<Position> visited = new ArrayList<>();
-            List<Direction> path = new ArrayList<>();
-
-            if (problem.isGoalState(problem.getStartState()))
-                return path;
-
-            PositionSearchProblemState startState = (PositionSearchProblemState) problem.getStartState();
-            queueXY.add(new Tuple<>(new Tuple<>(startState.position, new ArrayList<>()), 0));
-
-            while (true) {
-                if (queueXY.isEmpty())
-                    return new ArrayList<>();
-
-                Tuple<Tuple<Position, List<Direction>>, Integer> entry = queueXY.poll();
-                Position xy = entry.first.first;
-                path = entry.first.second;
-                visited.add(xy);
-
-                if (problem.isGoalState(new PositionSearchProblemState(xy)))
-                    return path;
-
-                List<Triple<ProblemState, Direction, Integer>> succ = problem
-                        .getSuccessors(new PositionSearchProblemState(xy));
-
-                if (succ == null)
-                    continue;
-
-                for (Triple<ProblemState, Direction, Integer> item : succ) {
-                    Position nextXY = ((PositionSearchProblemState) item.first).position;
-
-                    // if item[0] not in visited:
-                    // position not in `visited`
-
-                    // item[0] not in (state[2][0] for state in queueXY.heap) :
-                    // state[2] -> state[2][0] is pos and state[2][1] is path
-
-                    if (!visited.contains(nextXY) && queueXY.stream().noneMatch(t -> t.first.first.equals(nextXY))) {
-                        List<Direction> newPath = new ArrayList<>(path);
-                        newPath.add(item.second);
-                        queueXY.add(new Tuple<>(new Tuple<>(nextXY, newPath), item.third));
-                    }
-
-                    /*
-                     * elif item[0] not in visited and (
-                     * item[0] in (state[2][0] for state in queueXY.heap)
-                     * ):
-                     */
-                    else if (!visited.contains(nextXY)
-                            && queueXY.stream().anyMatch(t -> t.first.first.equals(nextXY))) {
-                        // find old pri
-                        /*
-                         * for state in queueXY.heap:
-                         * if state[2][0] == item[0]:
-                         */
-                        int oldPri = -1;
-                        for (Tuple<Tuple<Position, List<Direction>>, Integer> state : queueXY) {
-                            if (state.first.first.equals(nextXY)) {
-                                oldPri = problem.getCostOfActions(state.first.second);
-                            }
-                        }
-                        // newPri = problem.getCostOfActions(path + [item[1]])
-                        List<Direction> newPath = new ArrayList<>(path);
-                        newPath.add(item.second);
-                        int newPri = problem.getCostOfActions(newPath);
-
-                        // State is cheaper with his hew father -> update and fix parent
-                        if (oldPri > newPri) {
-                            // update by removing the old state and adding the new state
-                            queueXY.removeIf(t -> t.first.first.equals(nextXY));
-                            queueXY.add(new Tuple<>(new Tuple<>(nextXY, newPath), newPri));
-                        }
-                    }
-                }
-            }
+            //Your Code Here
         }
 
         else if (_problem instanceof CornersProblem) {
-            CornersProblem problem = (CornersProblem) _problem;
-            // queueXY: ( (position),[path] ), priority
-            PriorityQueue<Tuple<Tuple<Position, List<Direction>>, Integer>> queueXY = new PriorityQueue<>(
-                    (a, b) -> Integer.compare(a.second, b.second));
-
-            List<Position> visited = new ArrayList<>();
-            List<Direction> path = new ArrayList<>();
-
-            if (problem.isGoalState(problem.getStartState()))
-                return path;
-
-            CornersProblemState startState = (CornersProblemState) problem.getStartState();
-            queueXY.add(new Tuple<>(new Tuple<>(startState.state.first, new ArrayList<>()), 0));
-
-            while (true) {
-                if (queueXY.isEmpty())
-                    return new ArrayList<>();
-
-                Tuple<Tuple<Position, List<Direction>>, Integer> entry = queueXY.poll();
-                Position xy = entry.first.first;
-                path = entry.first.second;
-                visited.add(xy);
-
-                if (problem.isGoalState(new CornersProblemState(xy, startState.state.second)))
-                    return path;
-
-                List<Triple<ProblemState, Direction, Integer>> succ = problem
-                        .getSuccessors(new CornersProblemState(xy, startState.state.second));
-
-                if (succ == null)
-                    continue;
-
-                for (Triple<ProblemState, Direction, Integer> item : succ) {
-                    Position nextXY = ((CornersProblemState) item.first).state.first;
-
-                    if (!visited.contains(nextXY) && queueXY.stream().noneMatch(t -> t.first.first.equals(nextXY))) {
-                        List<Direction> newPath = new ArrayList<>(path);
-                        newPath.add(item.second);
-                        queueXY.add(new Tuple<>(new Tuple<>(nextXY, newPath), item.third));
-                    }
-
-                    else if (!visited.contains(nextXY)
-                            && queueXY.stream().anyMatch(t -> t.first.first.equals(nextXY))) {
-                        int oldPri = -1;
-                        for (Tuple<Tuple<Position, List<Direction>>, Integer> state : queueXY) {
-                            if (state.first.first.equals(nextXY)) {
-                                oldPri = problem.getCostOfActions(state.first.second);
-                            }
-                        }
-                        List<Direction> newPath = new ArrayList<>(path);
-                        newPath.add(item.second);
-                        int newPri = problem.getCostOfActions(newPath);
-
-                        if (oldPri > newPri) {
-                            queueXY.removeIf(t -> t.first.first.equals(nextXY));
-                            queueXY.add(new Tuple<>(new Tuple<>(nextXY, newPath), newPri));
-                        }
-                    }
-                }
-            }
+            //Your Code Here
         }
 
         else if (_problem instanceof FoodSearchProblem) {
-            FoodSearchProblem problem = (FoodSearchProblem) _problem;
-            PriorityQueue<Tuple<Tuple<Position, List<Direction>>, Integer>> queueXY = new PriorityQueue<>(
-                    (a, b) -> Integer.compare(a.second, b.second));
-
-            List<Position> visited = new ArrayList<>();
-            List<Direction> path = new ArrayList<>();
-
-            if (problem.isGoalState(problem.getStartState()))
-                return path;
-
-            FoodSearchProblemState startState = (FoodSearchProblemState) problem.getStartState();
-            queueXY.add(new Tuple<>(new Tuple<>(startState.state.first, new ArrayList<>()), 0));
-
-            while (true) {
-                if (queueXY.isEmpty())
-                    return new ArrayList<>();
-
-                Tuple<Tuple<Position, List<Direction>>, Integer> entry = queueXY.poll();
-                Position xy = entry.first.first;
-                path = entry.first.second;
-                visited.add(xy);
-
-                if (problem.isGoalState(new FoodSearchProblemState(xy, startState.state.second)))
-                    return path;
-
-                List<Triple<ProblemState, Direction, Integer>> succ = problem
-                        .getSuccessors(new FoodSearchProblemState(xy, startState.state.second));
-
-                if (succ == null)
-                    continue;
-
-                for (Triple<ProblemState, Direction, Integer> item : succ) {
-                    Position nextXY = ((FoodSearchProblemState) item.first).state.first;
-
-                    if (!visited.contains(nextXY) && queueXY.stream().noneMatch(t -> t.first.first.equals(nextXY))) {
-                        List<Direction> newPath = new ArrayList<>(path);
-                        newPath.add(item.second);
-                        queueXY.add(new Tuple<>(new Tuple<>(nextXY, newPath), item.third));
-                    }
-
-                    else if (!visited.contains(nextXY)
-                            && queueXY.stream().anyMatch(t -> t.first.first.equals(nextXY))) {
-                        int oldPri = -1;
-                        for (Tuple<Tuple<Position, List<Direction>>, Integer> state : queueXY) {
-                            if (state.first.first.equals(nextXY)) {
-                                oldPri = problem.getCostOfActions(state.first.second);
-                            }
-                        }
-                        List<Direction> newPath = new ArrayList<>(path);
-                        newPath.add(item.second);
-                        int newPri = problem.getCostOfActions(newPath);
-
-                        if (oldPri > newPri) {
-                            queueXY.removeIf(t -> t.first.first.equals(nextXY));
-                            queueXY.add(new Tuple<>(new Tuple<>(nextXY, newPath), newPri));
-                        }
-                    }
-                }
-            }
+            //Your Code Here
         }
 
         // If the problem type is not supported, throw an error
@@ -563,163 +139,23 @@ public class Search {
     public static List<Direction> aStarSearch(SearchProblem _problem,
             BiFunction<ProblemState, SearchProblem, Double> _heuristics) {
         if (_heuristics == null) {
-            // holy hell i figured it out
             _heuristics = (state, problem) -> nullHeuristic(problem);
         }
         // Java(536871575)
         final BiFunction<ProblemState, SearchProblem, Double> heuristics = _heuristics;
 
+        /* Search the node that has the lowest combined cost and heuristic first. */
+
         if (_problem instanceof PositionSearchProblem) {
-            PositionSearchProblem problem = (PositionSearchProblem) _problem;
-
-            // create a priority q, priority is determined by applying heuristics
-            PriorityQueue<Tuple<PositionSearchProblemState, List<Direction>>> queueXY = new PriorityQueue<>(
-                    // combining f() into one
-                    (a, b) -> Double.compare(heuristics.apply(a.first, problem) + problem.getCostOfActions(a.second),
-                            heuristics.apply(b.first, problem) + problem.getCostOfActions(b.second)));
-
-            List<Direction> path = new ArrayList<>();
-            List<Position> visited = new ArrayList<>();
-
-            if (problem.isGoalState(problem.getStartState()))
-                return path;
-
-            // Add initial state. Path is an empty list
-            Tuple<PositionSearchProblemState, List<Direction>> element = new Tuple<>(
-                    (PositionSearchProblemState) problem.getStartState(), new ArrayList<>());
-            queueXY.add(element);
-
-            while (true) {
-                if (queueXY.isEmpty())
-                    return new ArrayList<>();
-
-                Tuple<PositionSearchProblemState, List<Direction>> entry = queueXY.poll();
-                Position xy = entry.first.position;
-                path = entry.second;
-
-                if (visited.contains(xy))
-                    continue;
-                visited.add(xy);
-
-                if (problem.isGoalState(entry.first))
-                    return path;
-
-                List<Triple<ProblemState, Direction, Integer>> succ = problem.getSuccessors(entry.first);
-                if (succ == null)
-                    continue;
-
-                for (Triple<ProblemState, Direction, Integer> item : succ) {
-                    Position nextXY = ((PositionSearchProblemState) item.first).position;
-
-                    if (!visited.contains(nextXY)) {
-                        List<Direction> newPath = new ArrayList<>(path);
-                        newPath.add(item.second);
-                        queueXY.add(new Tuple<>((PositionSearchProblemState) item.first, newPath));
-                    }
-                }
-            }
+            //Your Code Here
         }
 
         else if (_problem instanceof CornersProblem) {
-            CornersProblem problem = (CornersProblem) _problem;
-
-            // create a priority queue where the priority is determined by applying
-            // heuristics
-            PriorityQueue<Tuple<CornersProblemState, List<Direction>>> queueXY = new PriorityQueue<>(
-                    (a, b) -> Double.compare(heuristics.apply(a.first, problem) + problem.getCostOfActions(a.second),
-                            heuristics.apply(b.first, problem) + problem.getCostOfActions(b.second)));
-
-            List<Direction> path = new ArrayList<>();
-            List<Position> visited = new ArrayList<>();
-
-            if (problem.isGoalState(problem.getStartState()))
-                return path;
-
-            // Add initial state. Path is an empty list
-            Tuple<CornersProblemState, List<Direction>> element = new Tuple<>(
-                    (CornersProblemState) problem.getStartState(), new ArrayList<>());
-            queueXY.add(element);
-
-            while (true) {
-                if (queueXY.isEmpty())
-                    return new ArrayList<>();
-
-                Tuple<CornersProblemState, List<Direction>> entry = queueXY.poll();
-                Tuple<Position, List<Integer>> state = entry.first.state;
-                path = entry.second;
-
-                if (visited.contains(state.first))
-                    continue;
-                visited.add(state.first);
-
-                if (problem.isGoalState(entry.first))
-                    return path;
-
-                List<Triple<ProblemState, Direction, Integer>> succ = problem.getSuccessors(entry.first);
-                if (succ == null)
-                    continue;
-
-                for (Triple<ProblemState, Direction, Integer> item : succ) {
-                    Position nextXY = ((CornersProblemState) item.first).state.first;
-
-                    if (!visited.contains(nextXY)) {
-                        List<Direction> newPath = new ArrayList<>(path);
-                        newPath.add(item.second);
-                        queueXY.add(new Tuple<>((CornersProblemState) item.first, newPath));
-                    }
-                }
-            }
+            //Your Code Here
         }
 
         else if (_problem instanceof FoodSearchProblem) {
-            FoodSearchProblem problem = (FoodSearchProblem) _problem;
-
-            // create a priority queue where the priority is determined by applying
-            // heuristics
-            PriorityQueue<Tuple<FoodSearchProblemState, List<Direction>>> queueXY = new PriorityQueue<>(
-                    (a, b) -> Double.compare(heuristics.apply(a.first, problem) + problem.getCostOfActions(a.second),
-                            heuristics.apply(b.first, problem) + problem.getCostOfActions(b.second)));
-
-            List<Direction> path = new ArrayList<>();
-            List<Position> visited = new ArrayList<>();
-
-            if (problem.isGoalState(problem.getStartState()))
-                return path;
-
-            // Add initial state. Path is an empty list
-            Tuple<FoodSearchProblemState, List<Direction>> element = new Tuple<>(
-                    (FoodSearchProblemState) problem.getStartState(), new ArrayList<>());
-            queueXY.add(element);
-
-            while (true) {
-                if (queueXY.isEmpty())
-                    return new ArrayList<>();
-
-                Tuple<FoodSearchProblemState, List<Direction>> entry = queueXY.poll();
-                Tuple<Position, Grid> state = entry.first.state;
-                path = entry.second;
-
-                if (visited.contains(state.first))
-                    continue;
-                visited.add(state.first);
-
-                if (problem.isGoalState(entry.first))
-                    return path;
-
-                List<Triple<ProblemState, Direction, Integer>> succ = problem.getSuccessors(entry.first);
-                if (succ == null)
-                    continue;
-
-                for (Triple<ProblemState, Direction, Integer> item : succ) {
-                    Position nextXY = ((FoodSearchProblemState) item.first).state.first;
-
-                    if (!visited.contains(nextXY)) {
-                        List<Direction> newPath = new ArrayList<>(path);
-                        newPath.add(item.second);
-                        queueXY.add(new Tuple<>((FoodSearchProblemState) item.first, newPath));
-                    }
-                }
-            }
+            //Your Code Here
         }
 
         throw new UnsupportedOperationException(
@@ -727,6 +163,8 @@ public class Search {
     }
 
     public static double nullHeuristic(SearchProblem problem) {
+        //A heuristic function estimates the cost from the current state to the nearest
+        //goal in the provided SearchProblem. This heuristic is trivial.
         return 0d;
     }
 }

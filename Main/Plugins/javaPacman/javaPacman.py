@@ -885,7 +885,6 @@ if __name__ == "__main__":
     if jpype_dir not in sys.path:
         sys.path.append(jpype_dir)
     
-    print(f"\n\nSYS PATH: {jpype_dir}")
     try:
         import jpype
     except ImportError:

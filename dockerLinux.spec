@@ -31,14 +31,12 @@ a = Analysis(
     'importlib.util',
     'abc',
     'tkinter',
-    'tkinter.tix',
-    'click',
     'jpype',
     'jdk'
 ] + collect_submodules('jpype'),
     hookspath=[],
     runtime_hooks=[],
-    excludes=[],
+    excludes=['Main/Plugins/javaPacman/JVM/Windows'],
     noarchive=False,
 )
 pyz = PYZ(a.pure)
@@ -49,7 +47,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='mainLinux',
+    name='Wysp',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,

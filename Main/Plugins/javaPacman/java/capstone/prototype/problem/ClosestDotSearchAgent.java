@@ -20,6 +20,7 @@ public class ClosestDotSearchAgent {
         this.actionIndex = 0;
     }
 
+    //Search for all food using a sequence of searches
     public void registerInitialState(GameState state) {
         GameState currentState = state;
         while (currentState.getFood().count(true) > 0) {
@@ -43,16 +44,19 @@ public class ClosestDotSearchAgent {
     }
 
     private List<Direction> findPathToClosestDot(GameState gameState) {
+        /*  Returns a path (a list of actions) to the closest dot, starting from
+            gameState.
+
+            Here are some useful elements of the startState below:
+        */
         Position startPosition = gameState.getPacmanPosition();
         Grid food = gameState.getFood();
         Grid walls = gameState.getWalls();
-
         AnyFoodSearchProblem problem = new AnyFoodSearchProblem(gameState);
 
-        // For simplicity, this is just a stub and needs to be implemented based on game
-        // mechanics
-        List<Direction> result = Search.breadthFirstSearch(problem);
-        return result;
+        //Your Code Here
+        throw new UnsupportedOperationException(
+                "Unimplemented method 'findPathToClosestDot() in ClosestDotSearchAgent.java'");
     }
 
     public Direction getAction(GameState state) {

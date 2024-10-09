@@ -1,4 +1,5 @@
 @echo off
+setlocal enabledelayedexpansion
 
 set JAVA_DIR=java
 set SOURCE_DIR=capstone
@@ -8,26 +9,34 @@ set MANIFEST_FILE=manifest.txt
 set MAIN_CLASS=capstone.prototype.Search
 set ORIGINAL_DIR=%cd%
 
-rem Change directory to java directory
+rem Switch to java directory
 echo Changing working directory to .\java\
 cd %JAVA_DIR%
 echo Working directory: %cd%
 
-rem Clean bin dir if it exists
+rem Clean bin directory if it exists
 if exist %BIN_DIR% (
     echo Cleaning the bin directory...
     rmdir /s /q %BIN_DIR%
 )
-
 mkdir %BIN_DIR%
 
-rem Compile
+rem Gather all Java files
+set JAVA_FILES=
+for /r %SOURCE_DIR% %%f in (*.java) do (
+    set JAVA_FILES=!JAVA_FILES! "%%f"
+)
+
+rem Compile Java files
 echo Compiling Java files...
-javac -d %BIN_DIR% %SOURCE_DIR%\**\*.java
+javac -d %BIN_DIR% !JAVA_FILES! 2> compile_errors.txt
 
 rem Check if compilation was successful
 if %ERRORLEVEL% neq 0 (
     echo Compilation failed. Exiting.
+    echo ==== Compilation Errors ====
+    type compile_errors.txt
+    del compile_errors.txt
     exit /b 1
 )
 
@@ -45,9 +54,10 @@ echo Cleanup...
 del %MANIFEST_FILE%
 rmdir /s /q %BIN_DIR%
 
-rem Move JAR file back to original working directory
-echo Moving jar file back...
+rem Move JAR file back to original working dir
+echo Moving JAR file back...
 cd %ORIGINAL_DIR%
 move %JAVA_DIR%\%JAR_FILE% %ORIGINAL_DIR%
 
 echo Success!
+endlocal

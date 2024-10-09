@@ -47,11 +47,10 @@ public class CornersProblem extends SearchProblem {
         this._expanded = 0; // WARNING: do NOT change this value manually
 
         /*
-         * Please add any code here which you would like to use in initializing the
+         * Please add any code below here which you would like to use in initializing the
          * problem
          */
-
-        this.initialState = new ArrayList<>(Arrays.asList(0, 0, 0, 0));
+        //Your Code Here
     }
 
     @Override
@@ -60,23 +59,17 @@ public class CornersProblem extends SearchProblem {
          * Returns the start state (in your state space, not the full Pacman state
          * space)
          */
-
-        CornersProblemState startState = new CornersProblemState(this.startingPosition, this.initialState);
-        return startState;
+        //Your Code Here *can remove thrown exception once finished*
+        throw new UnsupportedOperationException(
+                "Unimplemented method 'getStartState() in CornersProblem'");
     }
 
     @Override
     public boolean isGoalState(ProblemState inState) {
         /* Returns whether this search state is a goal state of the problem. */
-
-        Tuple<Position, List<Integer>> state = ((CornersProblemState) inState).state;
-        List<Integer> corners = state.second;
-
-        for (int corner : corners) {
-            if (corner == 0)
-                return false;
-        }
-        return true;
+        //Your Code Here
+        throw new UnsupportedOperationException(
+            "Unimplemented method 'isGoalState() in CornersProblem'");
     }
 
     @Override
@@ -97,39 +90,34 @@ public class CornersProblem extends SearchProblem {
         List<Triple<ProblemState, Direction, Integer>> successors = new ArrayList<>();
 
         for (Direction action : Direction.values()) {
-            if (action == Direction.STOP)
-                continue;
+            /*  Add a successor state to the successor list if the action is legal
+                Here's a code snippet for figuring out whether a new position hits a wall:
 
-            double x = pos.x;
-            double y = pos.y;
+                if (action == Direction.STOP)
+                    continue;
 
-            // find movement
-            Vector v = Actions.directionToVector(action);
-            int nextX = (int) (x + v.x);
-            int nextY = (int) (y + v.y);
-            Position nextPos = new Position((double) nextX, (double) nextY);
+                double x = pos.x;
+                double y = pos.y;
+                Vector v = Actions.directionToVector(action);
+                int nextX = (int) (x + v.x);
+                int nextY = (int) (y + v.y);
+                Position nextPos = new Position((double) nextX, (double) nextY);
 
-            // prevent searching in the negatives/over the walls
-            if (nextX < 0 || nextY < 0 || nextX >= this.walls.width || nextY >= this.walls.height)
-                continue;
-
-            if (!this.walls.data.get(nextX).get(nextY)) {
-                if (this.corners.contains(nextPos))
-                    corn.set(this.corners.indexOf(nextPos), 1);
-
-                CornersProblemState nextState = new CornersProblemState(nextPos, corn);
-                successors.add(new Triple<>(nextState, action, 1));
-            }
-
+                // prevent searching in the negatives/over the walls
+                if (nextX < 0 || nextY < 0 || nextX >= this.walls.width || nextY >= this.walls.height)
+                    continue;
+            */
         }
-        this._expanded++;
-        // *** After you have implemented the method, remove the following error
-        // statement *** //
+
+        this._expanded++; //DO NOT CHANGE
         return successors;
     }
 
     @Override
     public int getCostOfActions(List<Direction> actions) {
+        //Returns the cost of a particular sequence of actions.  If those actions
+        //include an illegal move, return 999999.  This is implemented for you.
+
         if (actions == null || actions.isEmpty())
             return 999999;
 

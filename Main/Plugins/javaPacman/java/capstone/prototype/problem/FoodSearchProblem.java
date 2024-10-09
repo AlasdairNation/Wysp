@@ -16,7 +16,7 @@ import capstone.prototype.types.Vector;
 // TODO: make java version of the comments
 public class FoodSearchProblem extends SearchProblem {
 
-    private Grid walls;
+    public Grid walls;
     private ProblemState start;
     public int _expanded;
     public Map<String, Object> heuristicInfo;

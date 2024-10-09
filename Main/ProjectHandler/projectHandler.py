@@ -237,7 +237,8 @@ class ProjectHandler:
     def CheckSyntax(self,filepath, javaFiles):
         if (self.languageHandler != None):  
             self.languageHandler.checkSyntax(filepath, javaFiles=javaFiles)
-    
+
+
     def Run(args):
         global processLock
         global process
@@ -253,18 +254,27 @@ class ProjectHandler:
         gamePath = str(projectInfo.getProjectInfoPath())
   
         if (runFile.endswith(".py")): # Checks if the run file is a python file.
-            #ONLY UNCOMMENT WHEN PACKAGING GAME
-            #pyPath = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'Libraries', 'Windows', 'windows-python', 'python.exe') # USE WHEN USING WINDOWS
-            #pyPath =  os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'Libraries', 'Linux', 'linux-python', 'bin', 'python3') # USE WHEN DOING LINUX 
-            #command = [pyPath, gamePath + "/" + gameName] + args.split() # Runs python file using the inputed arguments
+            def getPyExec():
+            # Check if python3 exists
+                py3Path = shutil.which('python3')
+                pyPath = shutil.which('python')
+                if pyPath:
+                    return 'python'
+                
+                if py3Path:
+                    return 'python3'
+
+                # If neither python3 nor python exists, raise an error
+                raise EnvironmentError("Neither 'python3' nor 'python' is found in the system's PATH.")
             
+            pythonExec = getPyExec()
             # Run python files using your python COMMENT OUT WHEN PACKAGING
             if programtype == "java":
                 compiled = ProjectHandler.Compile()
                 jpypDir = gameProjectInfo.getJpypeLocation()
-                command = ['python3', gamePath + "/" + runFile, '--jpype-dir', str(jpypDir)] + args.split()
+                command = [pythonExec, os.path.join(gamePath, runFile), '--jpype-dir', str(jpypDir)] + args.split()
             else: 
-                command = ['python3', gamePath + "/" + runFile] + args.split() # Runs python file using the inputed arguments=
+                command = [pythonExec, os.path.join(gamePath, runFile),] + args.split() # Runs python file using the inputed arguments=
             compiled = True
         
         elif (str(runFile).endswith(".java")): # Checks if the run file is java.
@@ -277,7 +287,6 @@ class ProjectHandler:
                 # Run Java files using your JRE COMMENT OUT WHEN PACKAGING
                 classpath_separator = ";" if os.name == "nt" else ":"
                 jpypDir = gameProjectInfo.getJpypeLocation()
-                print(f"jpyp in PH: --jpype {jpypDir}")
                 classpath = f"{gamePath}{classpath_separator}{jpypDir}"
                 command = ['java', "-cp", classpath, runFile.replace(".java", "")] + args.split()
                 

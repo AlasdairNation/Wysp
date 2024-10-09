@@ -11,7 +11,6 @@ class JVMHandler:
     def start(self):
         if self.jpypeDir and self.jpypeDir not in sys.path:
             sys.path.append(self.jpypeDir) 
-        print(f"RUN! {self.jpypeDir}")
         try:
             import jpype
         except ImportError:
@@ -31,11 +30,15 @@ class JVMHandler:
         current_dir = os.path.dirname(os.path.abspath(__file__))
 
         # Dynamically construct the path to the libjvm.so file relative to the current directory 
-        if os.path.exists(os.path.join(current_dir, 'JVM', 'jdk')):
-            self.path = os.path.join(current_dir, "JVM", 'jdk', 'lib', 'server', "libjvm.so")
-            
+        print(current_dir)
+        if os.path.exists(os.path.join(current_dir, 'JVM')) and hasattr(sys, '_MEIPASS'):
+            if platform.system() == "Linux":
+                self.path = os.path.join(current_dir, "JVM", 'Linux', 'jdk', 'lib', 'server', "libjvm.so")
+            elif platform.system() == "Windows":
+                self.path = os.path.join(current_dir, "JVM", 'Windows', 'jdk', 'bin', 'server', "jvm.dll")
         else: 
             self.path = jpype.getDefaultJVMPath()
+            
         
         jpype.startJVM(
             self.path,

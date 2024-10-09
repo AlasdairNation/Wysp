@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.function.BiFunction;
 
 import capstone.prototype.problem.CornersProblem;
+import capstone.prototype.problem.FoodSearchProblem;
 import capstone.prototype.problem.PositionSearchProblem;
 import capstone.prototype.problem.SearchProblem;
 import capstone.prototype.problem.states.FoodSearchProblemState;
@@ -30,28 +31,46 @@ public class Heuristics {
          * admissible (as well as consistent).
          */
         CornersProblem problem = (CornersProblem) inProblem;
-        List<Position> corners = problem.corners;
-        Grid walls = problem.walls;
+        List<Position> corners = problem.corners; //These are the corner coordinates
+        Grid walls = problem.walls; //These are the walls of the maze, as a Grid type.
 
         // *** YOUR CODE HERE *** //
-        return 0;
+        return 0; //Default to trivial solution
     }
 
     public static double foodHeuristic(ProblemState problemState, SearchProblem problem) {
         /*
-         * A search problem associated with finding the a path that collects all of the
-         * food (dots) in a Pacman game.
+         * Your heuristic for the FoodSearchProblem goes here.
          * 
-         * A search state in this problem is a tuple ( pacmanPosition, foodGrid ) where
-         * * pacmanPosition: a tuple (x,y) of integers specifying Pacman's position
-         * * foodGrid: a Grid (see game.py) of either True or False, specifying
-         * remaining food
+         * This heuristic must be consistent to ensure correctness.  First, try to come
+         * up with an admissible heuristic; almost all admissible heuristics will be
+         * consistent as well.
+         * 
+         * If using A* ever finds a solution that is worse uniform cost search finds,
+         * your heuristic is *not* consistent, and probably not admissible!  On the
+         * other hand, inadmissible or inconsistent heuristics may find optimal
+         * solutions, so be careful.
+         * 
+         * The state is a tuple ( pacmanPosition, foodGrid ) where foodGrid is a Grid
+         * (see Grid.java) of either True or False. You can call foodGrid.asList() to get
+         * a list of food coordinates instead.
+         * 
+         * If you want access to info like walls, capsules, etc., you can query the
+         * problem.  For example, Grid walls = foodSearchProblem.walls;.walls gives you 
+         * a Grid of where the walls are.
+         * 
+         * If you want to *store* information to be reused in other calls to the
+         * heuristic, there is a dictionary called foodSearchProblem.heuristicInfo that you can
+         * use. For example, if you only want to count the walls once and store that
+         * value, try: foodSearchProblem.heuristicInfo.put("wallCount", foodSearchProblem.walls.count())
+         * Subsequent calls to this heuristic can access
+         * foodSearchProblem.heuristicInfo.get("wallCount")
          */
         FoodSearchProblemState foodSearchProblemState = (FoodSearchProblemState) problemState;
+        FoodSearchProblem foodSearchProblem = (FoodSearchProblem) problem;
         Tuple<Position, Grid> state = foodSearchProblemState.state;
-        Position position = state.first;
+        Position pacmanPosition = state.first;
         Grid foodGrid = state.second;
-
         // *** YOUR CODE HERE *** //
         return 0;
     }
@@ -63,13 +82,6 @@ public class Heuristics {
         return Math.abs(position.x - goal.x) + Math.abs(position.y - goal.y);
     }
 
-    /*
-     * def euclideanHeuristic(position, problem, info={}):
-     * "The Euclidean distance heuristic for a PositionSearchProblem"
-     * xy1 = position
-     * xy2 = problem.goal
-     * return ((xy1[0] - xy2[0]) ** 2 + (xy1[1] - xy2[1]) ** 2) ** 0.5
-     */
     public static double euclideanHeuristic(ProblemState problemState, SearchProblem problem) {
         Position position = ((PositionSearchProblemState) problemState).position;
         Position goal = ((PositionSearchProblem) problem).goal;

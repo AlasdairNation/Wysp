@@ -1,6 +1,7 @@
 # -*- mode: python ; coding: utf-8 -*-
 #pyinstaller dockerWindows.spec MUST BE RUN ON WINDOWS NOT LINUX
-
+import jpype
+from PyInstaller.utils.hooks import collect_submodules
 a = Analysis(
     ['Main/main.py'],
     pathex=[],
@@ -10,7 +11,8 @@ a = Analysis(
             ('Main/GameHandler', 'GameHandler'), 
             ('Main/Plugins', 'Plugins'), 
             ('Main/ProjectHandler', 'ProjectHandler'),
-            ('Main', 'Main')],
+            ('Main', 'Main'),
+            (jpype.__path__[0], "jpype")],
     hiddenimports=[
     'PyQt5',
     'PyQt5.sip',
@@ -28,14 +30,12 @@ a = Analysis(
     'importlib.util',
     'abc',
     'tkinter',
-    'tkinter.tix',
     'jpype',
-    'click',
     'jdk'
-],
+] + collect_submodules('jpype'),
     hookspath=[],
     runtime_hooks=[],
-    excludes=[],
+    excludes=['Main/Plugins/javaPacman/JVM/Windows'],
     noarchive=False,
 )
 pyz = PYZ(a.pure)
@@ -46,7 +46,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='winMain.exe',
+    name='Wysp.exe',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,

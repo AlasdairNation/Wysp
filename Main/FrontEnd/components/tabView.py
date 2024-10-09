@@ -2,8 +2,6 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from pathlib import Path
-
-from click import open_file
 from FrontEnd.components.editor import Editor
 from FrontEnd.frontEndApi import FrontEndApi
 
