@@ -4,19 +4,23 @@
 3. Run as a program: Right click -> "Run as program"
 
 Note: 
-Booting and creating new projects can sometimes take a while, we promise it's not frozen. We just didn't have enough to to implement loading bars.
+Booting and creating new projects can sometimes take a while, we promise it's not frozen. We just didn't have enough time to implement loading bars.
 
 ## **Running the executable on the other Machines**
 1. Ensure you have the latest versions of java, and python installed.
-2. Install the latest version of TKinter: Typically achieved with running "pip install tk" inside your terminal/powershell. Any issues with running the game are likely because tkinter hasn't been installed correctly.
+2. Install the latest version of TKinter: Typically achieved with running `sudo apt-get install python3-tk` or `sudo apt-get install python-tk` inside your terminal/powershell. Any issues with running the game are likely because tkinter hasn't been installed correctly.
 3. Run the program
 
 ## **Windows Specific Troubleshooting**
 If you recieve the error "FileNotFoundError: capstone.jar file not found" when you attempt to run the java python game, your java path environment may not be properly configured.
 
 1. In windows search bar search: Edit the system environmental variables
-2. Click Environmental Variables
-3. Under System Variables Find Path
+2. Click `Environmental Variables`
+3. Under *System Variables* Find Path
 4. Click Path then click edit
 5. Click New
-6. Then put the location of you JDK bin file usally C:\Program Files\Java\jdk-xx\bin Replace jdk-xx with actual version, I.E jdk-21
+6. Then put the location of you JDK bin file usally `C:\Program Files\Java\jdk-xx\bin` Replace jdk-xx with your actual version, I.E jdk-21
+
+## **Virtulisation Specific Troubleshooting**
+If you recive the error `qt.qpa.xcb: could not connect to display` when trying to run on a virtual machine, like Windows Subsystem for Linux (WSL) simply
+type `export DISPLAY=:0` into your terminal
