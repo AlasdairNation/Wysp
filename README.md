@@ -8,7 +8,7 @@ Booting and creating new projects can sometimes take a while, we promise it's no
 
 ## **Running the executable on the other Machines**
 1. Ensure you have the latest versions of java, and python installed.
-2. Install the latest version of TKinter: Typically achieved with running "pip install tk" inside your terminal/powershell.
+2. Install the latest version of TKinter: Typically achieved with running "pip install tk" inside your terminal/powershell. Any issues with running the game are likely because tkinter hasn't been installed correctly.
 3. Run the program
 
 ## **Windows Specific Troubleshooting**
