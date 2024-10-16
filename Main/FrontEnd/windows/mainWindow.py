@@ -402,14 +402,8 @@ class MainWindow(QMainWindow):
             activeEditor.setAutoCompletionSource(QsciScintilla.AcsNone)
 
     def onClickedToggleCompilerView(self):
-            spec = importlib.util.find_spec("jpype")
-            if spec is not None and spec.origin:
-                jpype_dir = spec.origin
-                return jpype_dir
-            else:
-                raise ImportError("JPype module not found.")
-            visible = self.compileCluster.isVisible()
-            self.compileCluster.setVisible(not visible)
+        visible = self.compileCluster.isVisible()
+        self.compileCluster.setVisible(not visible)
 
     def onClickedToggleErrorLog(self):
         visible = self.errorLog.isVisible()
