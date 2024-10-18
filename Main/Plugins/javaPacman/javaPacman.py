@@ -869,7 +869,7 @@ if __name__ == "__main__":
             jpype_dir = args[i]
             skip_next = False
             continue
-
+ 
         if args[i] == "--jpype-dir":
             # If we encounter --jpype-dir, skip it and the next value
             
@@ -889,9 +889,11 @@ if __name__ == "__main__":
         import jpype
     except ImportError:
         pass
+ 
+     
+    import jpype
     
-    
-    jvm = JVMHandler(jpypeDir=jpype_dir)
+    jvm = JVMHandler()
     jvm.start()
 
     s = jpype.JClass("capstone.prototype.Search")()

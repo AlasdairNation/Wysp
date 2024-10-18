@@ -16,5 +16,4 @@
 -l mediumCorners -p AStarCornersAgent -z 0.5
 -l testSearch -p AStarFoodSearchAgent
 -l trickySearch -p AStarFoodSearchAgent
--l bigSearch -p ClosestDotSearchAgent -z .5 
--l bigSearch -p ApproximateSearchAgent -z .5 -q 
+-l bigSearch -p ClosestDotSearchAgent -z .5

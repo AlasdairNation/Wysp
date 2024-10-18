@@ -30,7 +30,6 @@ class JVMHandler:
         current_dir = os.path.dirname(os.path.abspath(__file__))
 
         # Dynamically construct the path to the libjvm.so file relative to the current directory 
-        print(current_dir)
         if os.path.exists(os.path.join(current_dir, 'JVM')) and hasattr(sys, '_MEIPASS'):
             if platform.system() == "Linux":
                 self.path = os.path.join(current_dir, "JVM", 'Linux', 'jdk', 'lib', 'server', "libjvm.so")

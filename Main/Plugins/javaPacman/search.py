@@ -168,7 +168,7 @@ def breadthFirstSearch(problem):
 
     # solve
     j_search = jpype.JClass("capstone.prototype.Search")()
-    sol = j_search.depthFirstSearch(j_problem)
+    sol = j_search.breadthFirstSearch(j_problem)
     sol_py = []
 
     if isinstance(problem, PositionSearchProblem) and problem.visualize:
